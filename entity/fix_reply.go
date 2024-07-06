@@ -1,6 +1,6 @@
 package entity
 
-type DefaultReply struct {
+type FixReply struct {
 	Id    int
 	Key   string
 	Reply string

@@ -171,31 +171,31 @@ func (c *SocketClient) readMessageToQueue() {
 
 func (c *SocketClient) listenMessageAndHandle() {
 	// 循环读取消息列表，进行处理
-	for payload := range c.messageQueue {
-		c.saveSeq(payload.Seq)
-		// ready 事件需要特殊处理
-		if payload.Type == "READY" {
-			c.readyHandler(payload)
-			continue
-		}
-		if err := HandlerProcess(payload.OPCode, payload.Type, payload); err != nil {
-			log.Errorf("%s HandlerProcess failed, %v", c.session, err)
-		}
-	}
-	//for {
-	//	select {
-	//	case payload := <-c.messageQueue:
-	//		c.saveSeq(payload.Seq)
-	//		// ready 事件需要特殊处理
-	//		if payload.Type == "READY" {
-	//			c.readyHandler(payload)
-	//			continue
-	//		}
-	//		if err := HandlerProcess(payload.OPCode, payload.Type, payload); err != nil {
-	//			log.Errorf("%s HandlerProcess failed, %v", c.session, err)
-	//		}
+	//for payload := range c.messageQueue {
+	//	c.saveSeq(payload.Seq)
+	//	// ready 事件需要特殊处理
+	//	if payload.Type == "READY" {
+	//		c.readyHandler(payload)
+	//		continue
+	//	}
+	//	if err := HandlerProcess(payload.OPCode, payload.Type, payload); err != nil {
+	//		log.Errorf("%s HandlerProcess failed, %v", c.session, err)
 	//	}
 	//}
+	for {
+		select {
+		case payload := <-c.messageQueue:
+			c.saveSeq(payload.Seq)
+			// ready 事件需要特殊处理
+			if payload.Type == "READY" {
+				c.readyHandler(payload)
+				continue
+			}
+			if err := HandlerProcess(payload.OPCode, payload.Type, payload); err != nil {
+				log.Errorf("%s HandlerProcess failed, %v", c.session, err)
+			}
+		}
+	}
 	log.Infof("%s message queue is closed", c.session)
 }
 

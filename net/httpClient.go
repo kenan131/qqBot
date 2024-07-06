@@ -3,8 +3,8 @@ package net
 import (
 	"encoding/json"
 	"github.com/go-resty/resty/v2"
-	token "helloGo/dto"
-	"log"
+	"helloGo/dto"
+	"helloGo/log"
 	"time"
 )
 
@@ -19,7 +19,7 @@ type MyHttpClient struct {
 
 var domain = "https://sandbox.api.sgroup.qq.com"
 
-func (m *MyHttpClient) InitHttpClient(token *token.Token) {
+func (m *MyHttpClient) InitHttpClient(token *dto.Token) {
 	authToken := token.GetString()
 	// 创建一个新的 resty 客户端
 	m.client = resty.New().
@@ -36,15 +36,14 @@ func (m *MyHttpClient) GetMethod(method string) string {
 
 	// 检查错误
 	if err != nil {
-		log.Fatalf("请求错误: %v", err)
+		log.Errorf("请求错误: %v", err)
 	}
 	if resp.StatusCode() == 200 {
 		var response SocketIpStruct
 		err := json.Unmarshal(resp.Body(), &response)
 		if err != nil {
-			log.Fatalln(err)
+			log.Error(err)
 		}
-
 		return response.URL
 	}
 	return ""
@@ -57,12 +56,12 @@ func (m *MyHttpClient) PostMethod(method string, body interface{}) string {
 		Post(method)
 	// 检查错误
 	if err != nil {
-		log.Fatalf("请求错误: %v", err)
+		log.Errorf("请求错误: %v", err)
 	}
 	return ""
 }
 
-func (m *MyHttpClient) PostMethodParam(method string, paramKey string, paramValue string, body interface{}) string {
+func (m *MyHttpClient) PostMethodParam(method string, paramKey string, paramValue string, body interface{}) error {
 	// 发送请求
 	_, err := m.client.R().
 		SetPathParam(paramKey, paramValue).
@@ -70,7 +69,8 @@ func (m *MyHttpClient) PostMethodParam(method string, paramKey string, paramValu
 		Post(method)
 	// 检查错误
 	if err != nil {
-		log.Fatalf("请求错误: %v", err)
+		log.Error(err)
+		return err
 	}
-	return ""
+	return nil
 }
