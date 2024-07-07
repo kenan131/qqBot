@@ -67,11 +67,11 @@ connectUrl: root:123456@tcp(127.0.0.1:3306)/qqBot?charset=utf8mb4&parseTime=True
 
 使用截图：
 
-<img src="https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/9VKJ%25Z_L%29Q%5DWQM_O%403%60_Q%5BW.png?q-sign-algorithm=sha1&q-ak=AKIDlDwyBtc-s9A-aOcFDvjX8JwrW0M3RCWA90MnrH6Csl_h3C-5QDT8dbO1p_UnfE6C&q-sign-time=1720344754;1720348354&q-key-time=1720344754;1720348354&q-header-list=host&q-url-param-list=ci-process&q-signature=96b5d241d0057413ec83822ef73857620ccc810e&x-cos-security-token=EPimACmGSBbVCMyTsfmA87ZCL1mEv67aa75aedb70a692d23db64220aa63d0cc27PNBjuXtUzdsKG-S3WrEy4iP1q9_thMGk_Z9jbqN3kJpWHFyZ12mmW1yQyvwKLS0YJ7sTi-5jNgtg8umU4H_pFnxx102EaI7IWz10qxadttPkPyyFXquYPua5YMNB1jkFUif4DZYSD-sDjDxWLzh-NTNBnOkPQpU-FTq4DmgKfkosN9mMeW_-LkyU--D7Zg4&ci-process=originImage" title="" alt="" data-align="center">
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2F8898W.png)
 
-![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/MWI%29339P%29C7%29GX2%7B_%240%7DORC.png?q-sign-algorithm=sha1&q-ak=AKIDFXk-jNAerbkKkutz-xB--99u2numjHqn-Ps4yLgbaN60L5JPKRGSDWNufYhfV2Rt&q-sign-time=1720344953;1720348553&q-key-time=1720344953;1720348553&q-header-list=host&q-url-param-list=ci-process&q-signature=9872275155a461c1bca97a7153df1158b99cf257&x-cos-security-token=j1V187XhL7IH3KfLdhfRjAOWyKyKogmaf35db31cd502f5a61a04a9fa26c01a7f8Kb4YlgSj1djU_5UN8LOURYGXyZBioFsIX6J32SURHQDGg8nLb9ITjL0PoztVmB79V2eoxLjpRfGw1N_ea-ftPpH5Y6A-5iEpPs9ab54KxkrFn9cMYgjrzmWqmQ77HucDNUJo-5Gl7SwNs4UHzCIpoejb5dYoZNAues3A86HWGmemrfy9PIejMplz1OG-vLZ&ci-process=originImage)
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2F9898ORC.png)
 
-![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/%7BKV_0V6%25%29U%5BKF%60%5B%28SULR~%29X.png?q-sign-algorithm=sha1&q-ak=AKIDa1NF71WmSLl5S8hgHgc6mCxuZsOTBiaAtbYPaZ2ywf5U0H974Nq6vQZDCa52yhKT&q-sign-time=1720345038;1720348638&q-key-time=1720345038;1720348638&q-header-list=host&q-url-param-list=ci-process&q-signature=2f461f8d6903ad5c724bf15f7f29e9863ebaeff4&x-cos-security-token=EPimACmGSBbVCMyTsfmA87ZCL1mEv67a6445cbe37be63ea160e4dd9044e0774c7PNBjuXtUzdsKG-S3WrEy47liBWjWLk0z6X22bd6d7s0pkcb_rdMRAUdIETFiRBX--z9WbQndRYicsq_Hi158fM5PQ7ClCXpgygSrQ44dlR9IIT6CK0vEqg5-_fzVS9Bmx5QEMKgLlFFZel_rU8xMvzJktB4ceQnTRsws5ChaEgXVP_w4E2bPyRkXQSFU8_g&ci-process=originImage)
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2FiioioX.png)
 
 #### 指令三：设置默认回复
 
@@ -330,6 +330,18 @@ func DeleteFixReply(key string, db *sql.DB) (string, error) {
     return "删除成功！", nil
 }
 ```
+
+### 待完善
+
+1、设置默认回复是否只允许管理人员进行操作。
+
+2、删除默认回复是否只允许管理人员进行操作。
+
+3、猜数字和成语接龙是否后续进入游戏模式后，可否不用艾特就能进行游戏回答。
+
+4、是否可以不依赖数据库组件，可改用文件存储
+
+5、代码格式和编码规范调整。
 
 ### 参考文档
 
