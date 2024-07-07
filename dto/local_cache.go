@@ -11,7 +11,7 @@ var DefaultMessageMap = map[string]string{
 	//"开心":       "看到你开心，我也很开心！<emoji:21>",
 }
 
-// UseIdiomMap 已经被使用过的成语，新一轮开启后会清空
+// UseIdiomMap 已经被使用过的成语，不能再使用了，新一轮开启后会清空
 var UseIdiomMap map[string]struct{}
 
 // IdiomLibrary 成语库 用来判断用户给的四个字是否是成语
@@ -20,9 +20,10 @@ var IdiomLibrary map[string]struct{}
 // IdiomTrie 前缀map 用来回复用户的成语
 var IdiomTrie *TrieNode
 
-// TrieNode 表示字典树的节点
+// TrieNode 节点
 type TrieNode struct {
-	Children map[rune]map[string]struct{} // 存储子节点
+	// 根据汉字 存储所有该汉字开头的成语
+	Children map[rune]map[string]struct{}
 }
 
 func init() {
@@ -31,7 +32,7 @@ func init() {
 	IdiomLibrary = make(map[string]struct{})
 }
 
-// Insert 向字典树中插入一个成语
+// Insert 插入一个成语
 func Insert(idiom string) {
 	for _, r := range idiom {
 		if _, exists := IdiomTrie.Children[r]; !exists {
@@ -49,7 +50,8 @@ func Insert(idiom string) {
 func StartsWithRandom(idiom string) (string, bool) {
 	lastRune := GetLastRune(idiom)
 	if _, exists := IdiomTrie.Children[lastRune]; !exists {
-		return "恭喜你赢了，机器人小弟我水平有限，回答不上来了！（管理员该补充成语库啦）<emoji:9>", false // 如果节点不存在，则没有以该前缀开始的成语
+		// 如果节点不存在，则没有以该前缀开始的成语
+		return "恭喜你赢了，机器人小弟我水平有限，回答不上来了！（管理员该补充成语库啦）<emoji:9>", false
 	}
 	teamMap := IdiomTrie.Children[lastRune]
 	for key, _ := range teamMap {

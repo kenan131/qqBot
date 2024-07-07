@@ -15,18 +15,17 @@ import (
 	"runtime"
 )
 
-var configStr = "config.yaml"
 var process service.Processor
 
 func main() {
-	token, err := dto.GetToken(configStr)
+	token, err := dto.GetToken(dto.ConfigStr)
 	checkError(err)
 	httpClient := net.MyHttpClient{}
 	httpClient.InitHttpClient(token)
 	// 获取websocket连接ip地址。
 	webSocketIp := httpClient.GetMethod(dto.GetWebSocketIp)
 	// 获取数据库连接
-	db := GetDbConnect(configStr)
+	db := GetDbConnect(dto.ConfigStr)
 	// 初始化map数据。
 	initData(db)
 	process = service.Processor{

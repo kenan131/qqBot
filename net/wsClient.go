@@ -12,8 +12,6 @@ import (
 type messageChan chan *dto.WSPayload
 type closeErrorChan chan error
 
-const DefaultQueueSize = 10000
-
 type SocketClient struct {
 	version         int
 	conn            *wss.Conn
@@ -26,7 +24,7 @@ type SocketClient struct {
 
 func NewSocketClient(session dto.Session) *SocketClient {
 	return &SocketClient{
-		messageQueue:    make(messageChan, DefaultQueueSize),
+		messageQueue:    make(messageChan, dto.DefaultQueueSize),
 		session:         &session,
 		closeChan:       make(closeErrorChan, 10),
 		heartBeatTicker: time.NewTicker(60 * time.Second),
@@ -171,17 +169,6 @@ func (c *SocketClient) readMessageToQueue() {
 
 func (c *SocketClient) listenMessageAndHandle() {
 	// 循环读取消息列表，进行处理
-	//for payload := range c.messageQueue {
-	//	c.saveSeq(payload.Seq)
-	//	// ready 事件需要特殊处理
-	//	if payload.Type == "READY" {
-	//		c.readyHandler(payload)
-	//		continue
-	//	}
-	//	if err := HandlerProcess(payload.OPCode, payload.Type, payload); err != nil {
-	//		log.Errorf("%s HandlerProcess failed, %v", c.session, err)
-	//	}
-	//}
 	for {
 		select {
 		case payload := <-c.messageQueue:

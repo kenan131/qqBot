@@ -5,7 +5,7 @@ import (
 	"helloGo/log"
 )
 
-const retryCnt = 5
+const retryCnt = 10
 
 type Container struct {
 	sessionChan chan dto.Session

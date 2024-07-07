@@ -17,8 +17,6 @@ type Processor struct {
 	Db  *sql.DB
 }
 
-const guessNumDefaultRange = 10000
-
 // 猜数游戏 答案
 var targetNum int
 
@@ -106,14 +104,14 @@ func Instructions001(content string) string {
 	rand.Seed(time.Now().UnixNano())
 	var numRange int
 	if num, err := strconv.Atoi(content); err != nil {
-		targetNum = rand.Intn(guessNumDefaultRange)
-		numRange = guessNumDefaultRange
+		targetNum = rand.Intn(dto.GuessNumDefaultRange)
+		numRange = dto.GuessNumDefaultRange
 	} else if num > 0 {
 		targetNum = rand.Intn(num)
 		numRange = num
 	} else {
-		targetNum = rand.Intn(guessNumDefaultRange)
-		numRange = guessNumDefaultRange
+		targetNum = rand.Intn(dto.GuessNumDefaultRange)
+		numRange = dto.GuessNumDefaultRange
 	}
 	guessNumFlag = dto.GameStart
 	return fmt.Sprintf("猜数游戏开始啦，@我参与答题，猜小猜大都会有提示哦！猜数范围为0-%d", numRange)

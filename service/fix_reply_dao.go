@@ -7,6 +7,7 @@ import (
 	"helloGo/log"
 )
 
+// GetFixReplyList 获取所有默认回复内容
 func GetFixReplyList(db *sql.DB) ([]entity.FixReply, error) {
 	var fixReplyList []entity.FixReply
 	rows, err := db.Query("SELECT `id`, `key`, `reply` FROM fix_reply")
@@ -23,6 +24,7 @@ func GetFixReplyList(db *sql.DB) ([]entity.FixReply, error) {
 	return fixReplyList, nil
 }
 
+// GetFixReplyByKey 根据key获取默认回复内容
 func GetFixReplyByKey(key string, db *sql.DB) (*entity.FixReply, error) {
 	rows, err := db.Query("SELECT `id`, `key`, `reply` FROM fix_reply where `key` = ? ", key)
 	if err != nil {
@@ -41,6 +43,7 @@ func GetFixReplyByKey(key string, db *sql.DB) (*entity.FixReply, error) {
 	return reply, nil
 }
 
+// InsertFixReply 插入默认回复
 func InsertFixReply(key string, reply string, db *sql.DB) error {
 	temp, _ := GetFixReplyByKey(key, db)
 	if temp != nil {
@@ -58,6 +61,7 @@ func InsertFixReply(key string, reply string, db *sql.DB) error {
 	return nil
 }
 
+// DeleteFixReply 根据key删除默认回复
 func DeleteFixReply(key string, db *sql.DB) (string, error) {
 	temp, _ := GetFixReplyByKey(key, db)
 	if temp != nil {
@@ -72,6 +76,7 @@ func DeleteFixReply(key string, db *sql.DB) (string, error) {
 	return "删除成功！", nil
 }
 
+// InitDefaultMap 初始化map
 func InitDefaultMap(db *sql.DB) error {
 	fixReplyList, err := GetFixReplyList(db)
 	if err != nil {
