@@ -17,6 +17,8 @@ type Processor struct {
 	Db  *sql.DB
 }
 
+const guessNumDefaultRange = 10000
+
 // 猜数游戏 答案
 var targetNum int
 
@@ -54,21 +56,22 @@ func (p *Processor) ProcessAtMessage(data *dto.Message) error {
 		// 普通消息模式
 		if content == "玩法介绍" {
 			replyContent =
-				`指令一，猜数游戏：输入指令/001 可指定猜数范围，如指定100则会随机生成一个范围为0-100的数。如不指定则生成0-10000之间的数哦!
-				指令二，成语接龙：输入指令/002 
-				指令三，给机器人添加默认回复。格式/003 key : reply，例如怎么获取资料 : 第一步...... 
-				指令四，删除指令三添加的默认回复，格式/004 key`
+				`指令一，猜数游戏：输入指令/001 {整形参数，可选}如指定100则会随机生成一个范围为0-100的数。如不指定或者整数解析失败则默认生成0-10000之间的数哦!
+指令二，成语接龙：输入指令/002 {四字成语}，机器人会自动根据你给的成语开始接龙。每次根据成语的某尾汉字作为开头成语。
+指令三，给机器人添加默认回复。格式/003 {key:reply}，样例唱跳rap:篮球，添加成功后，发送唱跳rap则机器人会自动回复篮球消息哦！ 
+指令四，删除指令三添加的默认回复，格式/004 {key}
+指令五，清空游戏状态，处于猜数游戏和成语接龙游戏的状态会被清空掉哦~`
 		} else if content == "你好！" {
 			replyContent = "你好！"
 		} else if isNumeric(content) && guessNumFlag != dto.GameEnd {
 			// 猜数游戏
 			replyContent = guessNumberGame(content)
+		} else if content == "成语提示" && idiomFlag != dto.GameEnd {
+			replyContent, _ = dto.HintIdiom(preRune)
 		} else if IsLengthFour(content) && idiomFlag != dto.GameEnd {
 			replyContent, _ = handlerIdiom(content, false)
-		} else if content == "成语提示！" && idiomFlag != dto.GameEnd {
-			replyContent, _ = dto.HintIdiom(preRune)
 		} else {
-			replyContent = "暂时看不懂你的指令，可以发送`玩法介绍`查看本机器人小弟的使用说明哦！<emoji:16>"
+			replyContent = "暂时看不懂你的指令，可以艾特我发送`玩法介绍`查看本机器人小弟的使用说明哦！<emoji:16>"
 		}
 	}
 	replyMessage := &dto.MessageToCreate{
@@ -101,15 +104,19 @@ func (p *Processor) ProcessMessage(data *dto.Message) error {
 
 func Instructions001(content string) string {
 	rand.Seed(time.Now().UnixNano())
+	var numRange int
 	if num, err := strconv.Atoi(content); err != nil {
-		targetNum = rand.Intn(10000)
+		targetNum = rand.Intn(guessNumDefaultRange)
+		numRange = guessNumDefaultRange
 	} else if num > 0 {
 		targetNum = rand.Intn(num)
+		numRange = num
 	} else {
-		targetNum = rand.Intn(10000)
+		targetNum = rand.Intn(guessNumDefaultRange)
+		numRange = guessNumDefaultRange
 	}
 	guessNumFlag = dto.GameStart
-	return "猜数游戏开始啦，@我参与答题，猜小猜大都会有提示哦！"
+	return fmt.Sprintf("猜数游戏开始啦，@我参与答题，猜小猜大都会有提示哦！猜数范围为0-%d", numRange)
 }
 func (p *Processor) Instructions002(content string) string {
 	if IsLengthFour(content) {
@@ -128,7 +135,7 @@ func (p *Processor) Instructions002(content string) string {
 func (p *Processor) Instructions003(content string) string {
 	parameters := strings.SplitN(content, ":", 2)
 	if len(parameters) != 2 {
-		return "添加失败！格式好像有些问题。(key:value)中间是英文冒号哦！ "
+		return "添加失败！格式好像有些问题。`key:value`中间是英文冒号哦！例如：`唱跳rap:篮球`即发送唱跳rap则会默认回复篮球哦！<emoji:16>"
 	} else {
 		key := parameters[0]
 		reply := parameters[1]

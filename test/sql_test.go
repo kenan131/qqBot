@@ -136,6 +136,7 @@ func TestName(t *testing.T) {
 				} else {
 					fmt.Printf("成语 '%s' 已插入，ID: %d\n", idiom, id)
 				}
+
 			}
 		}
 

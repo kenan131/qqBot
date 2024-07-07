@@ -53,6 +53,7 @@ func StartsWithRandom(idiom string) (string, bool) {
 	}
 	teamMap := IdiomTrie.Children[lastRune]
 	for key, _ := range teamMap {
+		// 本轮成语接龙游戏环节已经用过的成语则跳过
 		_, exists := UseIdiomMap[key]
 		if exists {
 			continue
