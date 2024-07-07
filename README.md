@@ -83,7 +83,7 @@ connectUrl: root:123456@tcp(127.0.0.1:3306)/qqBot?charset=utf8mb4&parseTime=True
 
 使用截图：
 
-![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/sjdsjA.png?q-sign-algorithm=sha1&q-ak=AKID7P9oga8zVXoFZWmImh8r_O-bY92XThET78BUxKcPTYdd3GMdf2za04G2KJLH_8BD&q-sign-time=1720346385;1720349985&q-key-time=1720346385;1720349985&q-header-list=host&q-url-param-list=ci-process&q-signature=b3e44bdce4c284648df9c088c314b554e4c89d40&x-cos-security-token=EPimACmGSBbVCMyTsfmA87ZCL1mEv67a41ddb8f0c0495ef88c255f4f69deb7b77PNBjuXtUzdsKG-S3WrEywxrhSzvpIw1SsPKh6FjhYF2UvYnR7Tu7N4rrvn4roRNVc7DEUW2QgazUvH6OnOehebmPPO2tG8b0QIothyoDX1pWrGvo5wdnGIEtSe6wRs3La7lKn5LkughLsAK5RClVMIL-YS0dZx7XsXICtEILhz_jFmWLm0-6eJR4TFNo3k3&ci-process=originImage)
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2FsjdsjA.png)
 
 #### 指令四：删除默认回复
 
@@ -91,7 +91,7 @@ connectUrl: root:123456@tcp(127.0.0.1:3306)/qqBot?charset=utf8mb4&parseTime=True
 
 艾特机器人并输入指令/003 {key}，进行删除。如果删除的key不存在，会进行提示哦~~
 
-![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/777F.png?q-sign-algorithm=sha1&q-ak=AKIDTL77p5havxKF6YHGbRYJ88oErpMjSiqmtaw5VL4R6nKoXzQ_6_8Rxt1UIHJMz1iC&q-sign-time=1720346885;1720350485&q-key-time=1720346885;1720350485&q-header-list=host&q-url-param-list=ci-process&q-signature=322408361aab58b2d1d77bc3dc7126a56fd6de91&x-cos-security-token=EPimACmGSBbVCMyTsfmA87ZCL1mEv67ac0995d0dd4cbf904abbffac995b02be97PNBjuXtUzdsKG-S3WrEy4wNogKeD2xtc2KqhEi1NHHQM8fpGllvwLsOUL0_KTrj4FxnCdVSdu3greCAPVvvmPi5dW7Nrg9AC9_dihGG4_fj_pUYGP9CqqyG7eA_NrY2CcXwRfyH5-x05_zGXqF9apdX5I1FX2Ahr4hMm999y4n-lqdolYgJdVNddl1c_yz5&ci-process=originImage)
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2F777F.png)
 
 #### 指令五：清空游戏状态
 
@@ -105,7 +105,7 @@ connectUrl: root:123456@tcp(127.0.0.1:3306)/qqBot?charset=utf8mb4&parseTime=True
 
 使用截图：
 
-![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8/cc54a9324.png?q-sign-algorithm=sha1&q-ak=AKID3-8Dy3k3ebExOcEuYfKGNTWj89_K2-PKGEwsRRgvt1eaLm4cIjqVrwvr0k5ed9NV&q-sign-time=1720347212;1720350812&q-key-time=1720347212;1720350812&q-header-list=host&q-url-param-list=ci-process&q-signature=8ed9ad15e0d062c65f72a70fe9bc86d7d1e5dac2&x-cos-security-token=EPimACmGSBbVCMyTsfmA87ZCL1mEv67ac6bbe4926ec5c976b9a7cc2492b3720e7PNBjuXtUzdsKG-S3WrEy-zV3w-oMjMRfLRMU0zTUnnXOSxBXe0OxPli1-S6ExxCYMrEDkmazJlIeCo0sOIwFFuw29wxa-zK1vp8lfVeycwg0eWlPScVx2Uv7FdYnrtfslVW8C_j6oK1NM9pymGcYdlsggAweat9I6NkHaogodvvy_Z1OxhM2C2IcO5H6IkX&ci-process=originImage)
+![](https://blogimg-1311682597.cos.ap-guangzhou.myqcloud.com/%E5%85%AC%E7%94%A8%2Fcc54a9324.png)
 
 ### 设计说明
 
